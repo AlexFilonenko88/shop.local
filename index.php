@@ -16,7 +16,7 @@ $products = Products::all(); // все товары в отдельную пре
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/styl.css">
     <title>Document</title>
 </head>
 <body>
@@ -30,10 +30,10 @@ $products = Products::all(); // все товары в отдельную пре
             <?php foreach ($products as $product) { ?>
                 <div class="product">
                     <div class="image">
-                        <img src="<? $product['image'] ?>" alt="">
+                        <img src="<?= $product['image'] ?>" alt="">
                     </div>
                     <div class="title"><?= $product['name'] ?></div>
-                    <div class="price"><?= $product['price'] ?></div>
+                    <div class="price"><?= $product['price'] ?> руб.</div>
                     <for class="product-form">
                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                         <input type="submit" value="Купить" class="btn">
