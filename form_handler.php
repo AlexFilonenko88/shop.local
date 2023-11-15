@@ -4,6 +4,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 use app\models\Orders;
 use app\models\Products;
 use app\components\Telegram;
+use \app\components\Bot;
 
 if(!isset($_POST['product_id'], $_POST['product_count'], $_POST['phone'])){
     echo json_encode(["error" => "Не добавлены поля"]);
@@ -29,11 +30,13 @@ $order = [
 $order_id = Orders::add($order);
 
 $message = 'Новый заказ #' . $order_id . PHP_EOL .
-    'Товар: #' . $order['product_id'] . $product['product_name'] . PHP_EOL .
+    'Товар: #' . $order['product_id'] . ' ' . $product['product_name'] . PHP_EOL .
     'Количество: ' . $order['product_count'] . PHP_EOL .
     'Цена: ' . $order['product_price'] . PHP_EOL .
     'Сумма: ' . ($order['product_count'] * $order['product_price']);
 
-Telegram::sendMessage($message);
+$keyboard = Bot::getOrderKeyboard($order_id, 0);
+
+Telegram::sendMessage($message, $keyboard);
 
 echo json_encode(['success' => 1]);

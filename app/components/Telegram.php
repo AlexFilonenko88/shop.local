@@ -35,13 +35,41 @@ class Telegram
         return json_decode($result, true);
     }
 
-    public static function sendMessage($text)
+    public static function sendMessage($text, $keyboard = null)
     {
         $params = [
             'chat_id' => static::CHAT_ID,
             'text' => $text,
         ];
+        if ($keyboard) {
+            $reply_markup = [
+                'inline_keyboard' => $keyboard,
+            ];
+            $params['reply_markup'] = json_decode($reply_markup);
+        }
         static::apiRequest('sendMessage', $params);
+    }
+
+    public static function editMessageKeyboard($message_id, $keyboard = null)
+    {
+        $params = [
+            'chat_id' => static::CHAT_ID,
+            'message_id' => $message_id,
+        ];
+        if ($keyboard) {
+            $reply_markup = [
+                'inline_keyboard' => $keyboard,
+            ];
+            $params['reply_markup'] = json_decode($reply_markup);
+        }
+        static::apiRequest('editMessageReplyMarkup', $params);
+    }
+
+    public static function answerCallbackQuery ($callback_query_id){
+        $params = [
+            'callback_query_id' => $callback_query_id,
+        ];
+        static:: apiRequest('answerCallbackQuery', $params);
     }
 }
 
