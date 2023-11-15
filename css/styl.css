@@ -65,3 +65,20 @@ section {
     font-size: 16px;
     cursor: pointer;
 }
+
+#order {
+    max-width: 400px;
+}
+
+#order .title, #order .form-control {
+    margin-bottom: 20px;
+}
+
+#order input[type="text"], #order input[type="number"] {
+    height: 40px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}
